@@ -1,38 +1,25 @@
 import React, { useEffect, useState } from "react";
-import logo from "../assets/logo.svg";
 import "../styles/App.css";
 import db from "../config/firebase";
 import { ref, onValue } from "firebase/database";
+import { Carousel } from "../components/Carousel";
+import Movie from "../types/movie";
 
 function App() {
-  const [movies, setMovies] = useState<Response>();
+  const [movies, setMovies] = useState<Movie[]>();
 
   useEffect(() => {
-    const starCountRef = ref(db, "movies");
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      console.log(data);
+    const moviesRef = ref(db, "movies");
+    onValue(moviesRef, (snapshot) => {
+      const data: Movie[] = snapshot.val();
+      setMovies(data);
     });
-  }, []);
+  });
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  console.log(movies);
+  
+
+  return <Carousel movies={movies} />;
 }
 
 export default App;
