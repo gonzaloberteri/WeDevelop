@@ -1,4 +1,4 @@
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, onValue } from "firebase/database";
 import db from "../config/firebase";
 import Movie from "../types/movie";
 
@@ -16,4 +16,28 @@ const addMovie = (query: string) => {
     });
 };
 
-export { addMovie };
+// @ts-ignore
+const deleteMovie = (
+  // @ts-ignore
+  event: MouseEvent<HTMLButtonElement, MouseEvent>,
+  movieId: string
+) => {
+  console.log(event.target.id);
+
+  const moviesRef = ref(db, "movies");
+  onValue(moviesRef, (snapshot) => {
+    const data: Movie[] = snapshot.val();
+
+    const keyIndex = Object.values(data).findIndex((m) => m.imdbID === movieId);
+
+    if (!keyIndex) return;
+    
+    const key = Object.keys(data)[keyIndex]
+
+    const movieRef = ref(db, `movies/${key}`);
+    set(movieRef, null);
+  });
+
+};
+
+export { addMovie, deleteMovie };

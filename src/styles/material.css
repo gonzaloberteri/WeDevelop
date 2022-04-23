@@ -1,10 +1,6 @@
 body {
 	font-family: Roboto, sans-serif;
 }
-img {
-	height: auto;
-	width: 100%;
-}
 textarea {
 	background: transparent;
 	border: 0;

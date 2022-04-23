@@ -4,6 +4,7 @@ import "../styles/material.css";
 import { ReactComponent as Share } from "../assets/svg/link.svg";
 import { ReactComponent as Bookmark } from "../assets/svg/bookmark.svg";
 import { ReactComponent as Dots } from "../assets/svg/dots.svg";
+import { deleteMovie } from "../lib/firebase";
 
 type CardProps = {
   movie: Movie;
@@ -75,7 +76,7 @@ const Card = ({ movie }: CardProps) => (
     </div>
     <div className="actions">
       <div className="action-buttons float-right">
-        <button className="button" type="button">
+        <button className="button" type="button" onClick={e => deleteMovie(e, movie.imdbID)}>
           delete
         </button>
       </div>
