@@ -1,18 +1,19 @@
-import { FormEvent } from "react";
+import { ref, push, set } from "firebase/database";
+import db from "../config/firebase";
+import Movie from "../types/movie";
 
 const axios = require("axios");
 
 const addMovie = (query: string) => {
-  console.log(query);
-
   if (!query) return;
 
   axios
-    .get(`https://fake-movie-database-api.herokuapp.com/api?s=${query}`)
+    .get(`https://www.omdbapi.com/?apikey=5960e495&t=${query}`)
     .then((res: any) => res.data)
-    .then((data: any) => console.log(data.Search[0]));
-
-  return false;
+    .then((movie: Movie) => {
+      const newRef = push(ref(db, "movies"));
+      set(newRef, movie);
+    });
 };
 
 export { addMovie };
