@@ -9,7 +9,9 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
+  gap: 1rem;
+  grid-auto-rows: 32rem;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  align-items: center; /* left and right */
+  justify-content: center;
 }

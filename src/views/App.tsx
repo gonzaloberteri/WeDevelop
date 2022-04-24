@@ -6,6 +6,7 @@ import "../styles/searchbox.css";
 import Movie from "../types/movie";
 import { addMovie } from "../lib/firebase";
 import Card from "../components/Card";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className="center">
+      <ToastContainer />
       <form className="form-wrapper cf">
         <input
           type="text"
@@ -38,7 +40,7 @@ function App() {
       {movies && (
         <div className="grid" style={{ marginInline: 30 }}>
           {Object.values(movies).map((m, i) => (
-            <Card movie={m} key={m.Title+i} />
+            <Card movie={m} key={m.Title + i} />
           ))}
         </div>
       )}

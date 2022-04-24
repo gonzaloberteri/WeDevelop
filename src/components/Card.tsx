@@ -71,7 +71,7 @@ const Card = ({ movie }: CardProps) => (
         </i>
       </div>
     </div>
-    <div className="supporting-text" style={{ minHeight: 96 }}>
+    <div className="supporting-text">
       {movie.Plot}
     </div>
     <div className="actions">
