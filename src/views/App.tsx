@@ -7,6 +7,7 @@ import Movie from "../types/movie";
 import { addMovie } from "../lib/firebase";
 import Card from "../components/Card";
 import { ToastContainer } from "react-toastify";
+import { ReactComponent as Logo } from "../assets/svg/logo.svg";
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -19,11 +20,12 @@ function App() {
 
       setMovies(data);
     });
-  }, []);
+  }, [movies]);
 
   return (
     <div className="center">
       <ToastContainer />
+      <Logo />
       <form className="form-wrapper cf">
         <input
           type="text"
